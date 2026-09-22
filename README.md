@@ -32,6 +32,41 @@
 - **Firebase Auth**: Robust login flows with Google Sign-in and OTP email validation.
 - **JWT Authorization**: Fine-grained role-based access control (Admin, Supplier, Client).
 
+### 🏗️ System Architecture
+
+```mermaid
+graph TD
+    subgraph Frontend [React Vite SPA]
+        A[Supplier Dashboard]
+        B[Client Marketplace]
+        C[Admin Panel]
+    end
+
+    subgraph API [ASP.NET Core Web API]
+        D[Controllers/Endpoints]
+        E[Services / Business Logic]
+        F[Repositories / Data Access]
+    end
+
+    subgraph Database & Cloud
+        G[(PostgreSQL)]
+        H[Firebase Auth]
+        I[Azure / Supabase Storage]
+    end
+
+    A -->|HTTPS / REST| D
+    B -->|HTTPS / REST| D
+    C -->|HTTPS / REST| D
+
+    D --> E
+    E --> F
+    F --> G
+
+    E -->|Verify Token| H
+    E -->|Upload Media| I
+```
+
+
 ---
 
 ## 🛠️ Technology Stack
